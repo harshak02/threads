@@ -1,5 +1,4 @@
 import mongoose, { mongo }  from "mongoose";
-import { boolean } from "zod";
 
 const userSchema = new mongoose.Schema({
     id : {type : String,required : true},
@@ -29,7 +28,8 @@ const userSchema = new mongoose.Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : 'Community'  
         }
-    ]
+    ],
+    email : String
 });
 
 

@@ -3,18 +3,23 @@ import { currentUser } from "@clerk/nextjs";
 
 async function Page() {
     const user = await currentUser();
-
+    console.log(user);
     const userInfo = {
-
+        _id : "1234",
+        username : "temp",
+        name : "tempName",
+        bio : "",
+        image : "image"
     };
 
     const userData = {
-        id : user?.id,
-        objectId : userInfo?._id,
-        username : userInfo?.username || user?.username,
-        name : userInfo?.name || user?.firstName || "",
+        id : user?.id || "",
+        objectId : userInfo?._id || "",
+        username : user?.username || userInfo?.username || "",
+        name : user?.firstName || userInfo?.name || "",
         bio : userInfo?.bio || "",
-        image : userInfo?.image || user?.imageUrl
+        image : user?.imageUrl || userInfo.image,
+        email : user?.emailAddresses[0].emailAddress || ""
     };
 
     return (

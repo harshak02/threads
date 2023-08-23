@@ -10,6 +10,7 @@ interface Params {
     bio: string;
     image: string;
     path: string;
+    email : string;
 }
 
 export async function updateUser({
@@ -18,7 +19,8 @@ export async function updateUser({
     name,
     bio,
     image,
-    path
+    path,
+    email
 }: Params): Promise<void> {
     connectToDB();
 
@@ -26,20 +28,21 @@ export async function updateUser({
 
         const userShow = await User.findOneAndUpdate(
             {
-                id: userId,
+                id : userId,
             },
             {
                 username: username.toLowerCase(),
                 name,
                 bio,
                 image,
-                onboarded: true
+                onboarded: true,
+                email
             },
             { upsert: true }
         );
 
         //for debugging
-        // console.log(userShow);
+        console.log(userShow);
 
         //related to cache
         if (path === '/profile/edit') {
@@ -47,6 +50,22 @@ export async function updateUser({
         }
 
     } catch (error: any) {
-        throw new Error(`Failed to create or update the Profile ${error.message}`)
+        throw new Error(`Failed to create or update the Profile ${error.message}`);
+    }
+}
+
+
+export async function fetchUser(userId : string){
+    try {
+        connectToDB();
+        console.log("connected to DB")
+        return await User
+        .findOne({id : userId})
+        // .populate({
+        //     path : 'communities',
+        //     model : Community
+        // })
+    } catch (error : any) {
+        throw new Error(`Failed to fetch user : ${error.message}`);
     }
 }

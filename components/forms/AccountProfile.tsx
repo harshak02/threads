@@ -30,6 +30,7 @@ interface Props {
     name: string;
     bio: string;
     image: string;
+    email : string;
   };
   btnTitle: string;
 }
@@ -69,7 +70,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       path: pathname,
-      userId: user.id,
+      userId : user.id,
+      email : user.email
     });
 
     if(pathname === '/profile/edit'){
