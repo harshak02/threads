@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ThreadValidation } from "@/lib/validations/thread";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,24 +13,9 @@ import {
 } from "@/components/ui/form";
 import * as z from "zod";
 import { Button } from "../ui/button";
-import Image from "next/image";
-import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
-import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
-import { createThread } from "@/lib/actions/thread.action";
-interface Props {
-  user: {
-    id: string;
-    objectId: string;
-    username: string;
-    name: string;
-    bio: string;
-    image: string;
-    email: string;
-  };
-  btnTitle: string;
-}
+import { createThread } from "@/lib/actions/thread.actions";
 
 function PostThread({ userId }: { userId: string }) {
   const router = useRouter();
